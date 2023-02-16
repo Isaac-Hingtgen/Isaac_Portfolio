@@ -1,27 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import './Terminal.css';
 import Arguments from './Arguments.js';
+import runCommands from './runCommands.js';
+import { INPUT_MARKER, GREETING, VERSION } from './CONSTANTS.js';
+
+
 
 function System() {
     return (
         <>
             <span className='green-text'>ihing@Isaac-Portfolio</span> 
-            <span className='purple-text'> v1.0</span> 
+            <span className='purple-text'> v{VERSION}</span> 
             <span className='gold-text'> ~</span>
         </>
     )  
 }
 
 function Terminal() {
-    const INPUT_MARKER = "$ ";
-    const WD = "/c/Users/Isaac-Portfolio/CLI";
-    const VALID_PATHS = [
-        "PortfolioUI",
-        "Github",
-        "LinkedIn",
-    ];
-    
-    const GREETING = 'Hello.';
     const [commandList, setCommandList] = useState([]);
     const [currentInput, setCurrentInput] = useState(GREETING);
     const [currentCommandIndex, setCurrentCommandIndex] = useState(commandList.length);
@@ -30,11 +25,9 @@ function Terminal() {
     let keyIndex = 0;
 
     useEffect(() => lastElement.scrollIntoView());
-    useEffect(() => {
-        window.addEventListener('load', sayHello);
-        return () => window.removeEventListener('load', sayHello);
-    });
 
+    window.addEventListener('load', sayHello);
+  
     return (
         <>
             <section className='container'>
@@ -47,7 +40,7 @@ function Terminal() {
                                 {INPUT_MARKER}
                                 <span>{list.command}</span>     {(list.length !== 0 && "\n")}
                                 <span>{list.response}</span>    {(list.length !== 0 && "\n\n")}
-                                {list.response.substring(list.response.length - "command not found".length) === "command not found" && <Arguments paths={VALID_PATHS}/>}
+                                {list.response.substring(list.response.length - "command not found".length) === "command not found" && <Arguments />}
                                 <System /> <br ref={(ele) => { lastElement = ele }}/>
                             </div>
                         )
@@ -111,17 +104,12 @@ function Terminal() {
     function handleCommand(input) {
         let output = "";
         let args = input.split(' ');
-        switch (args[0]) {
-            case "clear":
-                setCommandList(() => []);
-                keyIndex = 0;
-                return;
-            case "pwd":
-                output = WD;
-                break;
-            default:
-                output = `bash: ${input}: command not found`;
-                break;
+        if(args[0] === 'clear') {
+            setCommandList(() => []);
+            keyIndex = 0;
+            return;
+        } else {
+            output = runCommands(args);
         }
         setCommandList(prevCommands => {
             return (

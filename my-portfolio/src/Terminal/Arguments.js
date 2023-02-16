@@ -1,5 +1,11 @@
-export default function Arguments({paths}) {
+import { VALID_PATHS } from "./CONSTANTS.js"
+
+export default function Arguments() {
     const args = [
+        {
+            command: "npm start",
+            description: "Renders UI-friendly Isaac's Portfolio"
+        },
         {
             command: "cd <path>",
             description: "Redirects to the path",
@@ -10,7 +16,7 @@ export default function Arguments({paths}) {
         },
         {
             command: "git add <your_email@example.com>",
-            description: "Prepares an email for Isaac Hingtgen",
+            description: "Sends your email address to Isaac Hingtgen",
         },
         {
             command: "git commit -m \"<your message>\"",
@@ -40,7 +46,7 @@ export default function Arguments({paths}) {
             })}
             <div className="path header">
                 <br/>-Path Variables-<br/>
-                {paths.map(path => {
+                {VALID_PATHS.map(path => {
                     return (
                         <span className='path' key={path}>{path}</span>
                     )

@@ -1,5 +1,5 @@
-import Terminal from "./Terminal.js";
-import "./overflowHidden.css";
+import Terminal from "./Terminal/Terminal.js";
+
 
 function App() {
   return (
