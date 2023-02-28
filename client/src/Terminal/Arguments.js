@@ -1,4 +1,5 @@
 import { VALID_PATHS } from "../CONSTANTS.js"
+import './Terminal.css';
 
 export default function Arguments() {
     const args = [
@@ -38,18 +39,18 @@ export default function Arguments() {
             <div className='description header'>-Description-</div>
             {args.map(arg => {
                 return (
-                	<div key={arg.command}>
-                    <span className='command'>{arg.command}</span>
-                    <span className='description'>{arg.description}</span>
-                  </div>
+                	<>
+                    <span key={arg.command} className='command'>{arg.command}</span>
+                    <span key={arg.description} className='description'>{arg.description}</span>
+                  </>
                 )
             })}
             <div className="path header">
                 <br/>-Path Variables-<br/>
                 {Object.keys(VALID_PATHS).map(key => {
-                    return (
-                        <span className='path' key={key}>{VALID_PATHS[key].name}</span>
-                    )
+                  return (
+                    <span className='path' key={key}>{VALID_PATHS[key].name}</span>
+                  )
                 })}
             </div>
             <br/>
