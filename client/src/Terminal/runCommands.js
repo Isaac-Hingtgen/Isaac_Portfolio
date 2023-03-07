@@ -1,4 +1,4 @@
-import { VALID_PATHS, WD, MY_EMAIL } from "../CONSTANTS.js"
+import { VALID_PATHS, WD } from "../CONSTANTS.js"
 import goTo from "../goToUrl/goToUrl.js";
 
 export default function runCommands(args) {
@@ -53,16 +53,16 @@ export default function runCommands(args) {
                     if(args[2] === '-m') {
                         args.shift(); args.shift(); args.shift();
                         yourMessage = args.join(" ")
-                        output = `[main (${MY_EMAIL}) message] ${yourMessage}`
+                        output = `[main (email) message] ${yourMessage}`
                     } 
                     break;
 
                 case "push":
                     if(args[2] === 'origin') {
                         if(args.length === 4 && args[3] === 'main') {
-                            output = `To ${MY_EMAIL}\n` + 
-                                     ` * [new message]     your email -> ${MY_EMAIL}\n` +
-                                     `email '${MY_EMAIL}' set up to receive '${yourMessage}'`
+                            output = `To Isaac\n` + 
+                                     ` * [new message]     your email -> main\n` +
+                                     `email 'main' set up to receive '${yourMessage}'`
                         }
                     }
                     break;

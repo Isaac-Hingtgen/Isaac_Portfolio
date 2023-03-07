@@ -17,4 +17,3 @@ export const VALID_PATHS = {
     }
 };
 export const GREETING = 'Hello.';
-export const MY_EMAIL = 'ihingtge@asu.edu';
